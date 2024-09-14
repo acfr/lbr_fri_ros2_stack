@@ -1,4 +1,4 @@
-/**/admittance_control:
+admittance_control:
   ros__parameters:
     base_link: "link_0"
     end_effector_link: "link_ee"

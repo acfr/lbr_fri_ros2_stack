@@ -18,7 +18,7 @@ class LBRDescriptionMixin:
             "model", default="iiwa7"
         ),
         robot_name: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
-            "robot_name", default="lbr"
+            "robot_name", default=""
         ),
         port_id: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
             "port_id", default="30200"
@@ -62,7 +62,7 @@ class LBRDescriptionMixin:
         )
 
     @staticmethod
-    def arg_robot_name(default_value: str = "lbr") -> DeclareLaunchArgument:
+    def arg_robot_name(default_value: str = "") -> DeclareLaunchArgument:
         return DeclareLaunchArgument(
             name="robot_name",
             default_value=default_value,
@@ -93,7 +93,7 @@ class LBRDescriptionMixin:
 
     @staticmethod
     def param_robot_name() -> Dict[str, LaunchConfiguration]:
-        return {"robot_name": LaunchConfiguration("robot_name", default="lbr")}
+        return {"robot_name": LaunchConfiguration("robot_name", default="")}
 
     @staticmethod
     def param_port_id() -> Dict[str, LaunchConfiguration]:

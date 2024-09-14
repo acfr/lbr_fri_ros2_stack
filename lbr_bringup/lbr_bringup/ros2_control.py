@@ -49,7 +49,7 @@ class LBRROS2ControlMixin:
     @staticmethod
     def node_ros2_control(
         robot_name: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
-            "robot_name", default="lbr"
+            "robot_name", default=""
         ),
         use_sim_time: Optional[Union[LaunchConfiguration, bool]] = LaunchConfiguration(
             "use_sim_time", default="false"
@@ -84,7 +84,7 @@ class LBRROS2ControlMixin:
     @staticmethod
     def node_controller_spawner(
         robot_name: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
-            "robot_name", default="lbr"
+            "robot_name", default=""
         ),
         controller: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
             "ctrl"
@@ -108,7 +108,7 @@ class LBRROS2ControlMixin:
     def node_robot_state_publisher(
         robot_description: Dict[str, str],
         robot_name: Optional[LaunchConfiguration] = LaunchConfiguration(
-            "robot_name", default="lbr"
+            "robot_name", default=""
         ),
         use_sim_time: Optional[Union[LaunchConfiguration, bool]] = LaunchConfiguration(
             "use_sim_time", default="false"

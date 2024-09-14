@@ -15,7 +15,7 @@
             </xacro:if>
             <xacro:if value="${mode == 'gazebo'}">
                 <hardware>
-                    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+                    <plugin>ign_ros2_control/IgnitionSystem</plugin>
                 </hardware>
             </xacro:if>
             <xacro:if value="${mode == 'hardware'}">
@@ -97,10 +97,6 @@
                     <command_interface name="position">
                         <param name="min">${min_position}</param>
                         <param name="max">${max_position}</param>
-                    </command_interface>
-                    <command_interface name="effort">
-                        <param name="min">-${max_torque}</param>
-                        <param name="max"> ${max_torque}</param>
                     </command_interface>
                     <state_interface name="position" />
                     <state_interface name="velocity" />

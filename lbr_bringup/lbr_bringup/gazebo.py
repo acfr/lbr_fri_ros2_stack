@@ -26,7 +26,7 @@ class GazeboMixin:
     @staticmethod
     def node_spawn_entity(
         robot_name: Optional[Union[LaunchConfiguration, str]] = LaunchConfiguration(
-            "robot_name", default="lbr"
+            "robot_name", default=""
         ),
         tf: List[float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
         **kwargs,
