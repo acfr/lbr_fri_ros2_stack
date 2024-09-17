@@ -310,6 +310,9 @@
                 <geometry>
                     <mesh filename="file://$(find lbr_description)/meshes/mount/Kuka_Scanner_mount_4.dae" />
                 </geometry>
+                <material name="zed2_mat">
+                    <color rgba="0.25 0.25 0.25 1.0"/>
+                </material>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
