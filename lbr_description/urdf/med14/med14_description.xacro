@@ -9,6 +9,11 @@
         <xacro:include filename="$(find lbr_description)/gazebo/lbr_gazebo.xacro" />
         <xacro:include filename="$(find lbr_ros2_control)/config/lbr_system_interface.xacro" />
 
+        <!-- Include the ZED camera macro -->
+        
+        <xacro:include filename="$(find lbr_description)/urdf/zed/zed_macro.urdf.xacro" />
+        <xacro:zed_camera name="zedm" model="zedm"/>
+
         <!-- joint limits via yaml -->
         <xacro:property name="joint_limits_path"
             value="$(find lbr_description)/urdf/med14/joint_limits.yaml" />
@@ -293,5 +298,31 @@
 
         <link name="link_ee">
         </link>
+                <joint name="joint_mount" type="fixed">
+            <origin rpy="0 3.145 0" xyz="0.0 0.0 -0.01" />
+            <parent link="link_ee" />
+            <child link="mount" />
+        </joint>
+
+        <link name="mount">
+            <visual>
+                <origin rpy="0.0 0 0" xyz="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="file://$(find lbr_description)/meshes/mount/Kuka_Scanner_mount_4.dae" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="file://$(find lbr_description)/meshes/mount/Kuka_Scanner_mount_4.dae" />
+                </geometry>
+            </collision>
+        </link>
+        
+        <joint name="zedm_joint" type="fixed">
+            <parent link="mount"/> 
+            <child link="zedm_camera_link"/> 
+            <origin xyz="0.007 ${100/1000} ${-95/1000}" rpy="0.0 ${135*3.145/180.0} ${3.145/2.0}"/>
+        </joint> 
     </xacro:macro>
 </robot>
