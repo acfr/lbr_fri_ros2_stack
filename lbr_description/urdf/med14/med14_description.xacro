@@ -11,7 +11,7 @@
 
         <!-- Include the ZED camera macro -->
         
-        <xacro:include filename="$(find lbr_description)/urdf/zed/zed_macro.urdf.xacro" />
+        <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro" />
         <xacro:zed_camera name="zedm" model="zedm"/>
 
         <!-- joint limits via yaml -->

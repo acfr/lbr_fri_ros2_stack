@@ -43,8 +43,8 @@ def generate_launch_description() -> LaunchDescription:
     joint_state_broadcaster = LBRROS2ControlMixin.node_controller_spawner(
         controller="joint_state_broadcaster"
     )
-    force_torque_broadcaster = LBRROS2ControlMixin.node_controller_spawner(
-        controller="force_torque_broadcaster"
+    joint_trajectory_controller = LBRROS2ControlMixin.node_controller_spawner(
+        controller="joint_trajectory_controller"
     )
     lbr_state_broadcaster = LBRROS2ControlMixin.node_controller_spawner(
         controller="lbr_state_broadcaster"
@@ -58,7 +58,7 @@ def generate_launch_description() -> LaunchDescription:
             target_action=ros2_control_node,
             on_start=[
                 joint_state_broadcaster,
-                force_torque_broadcaster,
+                joint_trajectory_controller,
                 lbr_state_broadcaster,
                 controller,
             ],
