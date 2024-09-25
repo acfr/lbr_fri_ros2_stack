@@ -14,9 +14,9 @@ class GazeboMixin:
             PythonLaunchDescriptionSource(
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("gazebo_ros"),
+                        FindPackageShare("ros_gz_sim"),
                         "launch",
-                        "gazebo.launch.py",
+                        "gz_sim.launch.py",
                     ]
                 )
             ),
@@ -34,13 +34,13 @@ class GazeboMixin:
         label = ["-x", "-y", "-z", "-R", "-P", "-Y"]
         tf = [str(x) for x in tf]
         return Node(
-            package="gazebo_ros",
-            executable="spawn_entity.py",
+            package="ros_gz_sim",
+            executable="create",
             arguments=[
-                "-topic",
-                "robot_description",
-                "-entity",
+                "-name",
                 robot_name,
+                "-topic",
+                "/robot_description",
             ]
             + [item for pair in zip(label, tf) for item in pair],
             output="screen",
