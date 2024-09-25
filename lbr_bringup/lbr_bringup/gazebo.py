@@ -20,6 +20,7 @@ class GazeboMixin:
                     ]
                 )
             ),
+            launch_arguments={'gz_args': ['-r ', 'empty.sdf'], 'on_exit_shutdown': 'true'}.items(),
             **kwargs,
         )
 
@@ -40,7 +41,7 @@ class GazeboMixin:
                 "-name",
                 robot_name,
                 "-topic",
-                "/robot_description",
+                "robot_description",
             ]
             + [item for pair in zip(label, tf) for item in pair],
             output="screen",

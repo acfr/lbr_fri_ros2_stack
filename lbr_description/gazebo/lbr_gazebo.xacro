@@ -6,7 +6,12 @@
         <gazebo>
             <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
                 <parameters>$(find lbr_ros2_control)/config/lbr_controllers.yaml</parameters>
-                <remapping>~/robot_description:=robot_description</remapping>
+                <robot_param_node>robot_state_publisher</robot_param_node>
+                <robot_param_node>robot_description</robot_param_node>
+                <ros>
+                    <namespace>/${robot_name}</namespace>
+                    <remapping>~/robot_description:=robot_description</remapping>
+                </ros>
             </plugin>
         </gazebo>
 
