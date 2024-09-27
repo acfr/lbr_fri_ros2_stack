@@ -3,7 +3,11 @@ from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from lbr_bringup.description import LBRDescriptionMixin
 from lbr_bringup.gazebo import GazeboMixin
 from lbr_bringup.ros2_control import LBRROS2ControlMixin
+from launch.actions import ExecuteProcess
+from ament_index_python.packages import get_package_share_directory
+from launch_ros.actions import Node
 
+import os
 
 def generate_launch_description() -> LaunchDescription:
     ld = LaunchDescription()
@@ -53,4 +57,5 @@ def generate_launch_description() -> LaunchDescription:
             controller=LaunchConfiguration("ctrl")
         )
     )
+
     return ld

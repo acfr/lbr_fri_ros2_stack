@@ -37,13 +37,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_0.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_0.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_0.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_0.stl" />
                 </geometry>
             </collision>
         </link>
@@ -71,13 +71,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.1475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_1.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_1.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.1475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_1.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_1.stl" />
                 </geometry>
             </collision>
         </link>
@@ -105,13 +105,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0105 -0.34" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_2.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_2.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0105 -0.34" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_2.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_2.stl" />
                 </geometry>
             </collision>
         </link>
@@ -139,13 +139,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.5475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_3.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_3.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.5475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_3.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_3.stl" />
                 </geometry>
             </collision>
         </link>
@@ -173,13 +173,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 -0.0105 -0.74" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_4.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_4.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 -0.0105 -0.74" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_4.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_4.stl" />
                 </geometry>
             </collision>
         </link>
@@ -207,13 +207,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.9475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_5.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_5.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -0.9475" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_5.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_5.stl" />
                 </geometry>
             </collision>
         </link>
@@ -241,13 +241,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0707 -1.14" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_6.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_6.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0707 -1.14" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_6.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_6.stl" />
                 </geometry>
             </collision>
         </link>
@@ -274,13 +274,13 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -1.231" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/visual/link_7.dae" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/visual/link_7.dae" />
                 </geometry>
             </visual>
             <collision>
                 <origin rpy="0 0 0" xyz="0.0 0.0 -1.231" />
                 <geometry>
-                    <mesh filename="package://lbr_description/meshes/med7/collision/link_7.stl" />
+                    <mesh filename="file://$(find lbr_description)/meshes/med7/collision/link_7.stl" />
                 </geometry>
             </collision>
         </link>

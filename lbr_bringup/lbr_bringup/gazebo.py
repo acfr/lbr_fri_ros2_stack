@@ -14,12 +14,13 @@ class GazeboMixin:
             PythonLaunchDescriptionSource(
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("gazebo_ros"),
+                        FindPackageShare("ros_gz_sim"),
                         "launch",
-                        "gazebo.launch.py",
+                        "gz_sim.launch.py",
                     ]
                 )
             ),
+            launch_arguments={'gz_args': ['-r ', 'empty.sdf'], 'on_exit_shutdown': 'true'}.items(),
             **kwargs,
         )
 
@@ -34,13 +35,13 @@ class GazeboMixin:
         label = ["-x", "-y", "-z", "-R", "-P", "-Y"]
         tf = [str(x) for x in tf]
         return Node(
-            package="gazebo_ros",
-            executable="spawn_entity.py",
+            package="ros_gz_sim",
+            executable="create",
             arguments=[
+                "-name",
+                robot_name,
                 "-topic",
                 "robot_description",
-                "-entity",
-                robot_name,
             ]
             + [item for pair in zip(label, tf) for item in pair],
             output="screen",
