@@ -31,6 +31,9 @@ def hidden_setup(context: LaunchContext) -> List[LaunchDescriptionEntity]:
     if mode == "gazebo":
         use_sim_time = True
 
+    print("----------------------------------------------")
+    print(use_sim_time)
+
     # MoveGroup
     robot_name = LaunchConfiguration("robot_name")
     ld.add_action(

@@ -12,7 +12,9 @@
         <!-- Include the ZED camera macro -->
         
         <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro" />
-        <xacro:zed_camera name="zedm" model="zedm"/>
+        <xacro:zed_camera name="zedm" >
+            <gnss_origin/>
+        </xacro:zed_camera>
 
         <!-- joint limits via yaml -->
         <xacro:property name="joint_limits_path"
@@ -298,7 +300,7 @@
 
         <link name="link_ee">
         </link>
-                <joint name="joint_mount" type="fixed">
+        <joint name="joint_mount" type="fixed">
             <origin rpy="0 3.145 0" xyz="0.0 0.0 -0.01" />
             <parent link="link_ee" />
             <child link="mount" />

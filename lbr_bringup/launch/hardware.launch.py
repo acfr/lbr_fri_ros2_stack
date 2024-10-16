@@ -17,15 +17,6 @@ def generate_launch_description() -> LaunchDescription:
     ld.add_action(LBRROS2ControlMixin.arg_ctrl_cfg())
     ld.add_action(LBRROS2ControlMixin.arg_ctrl())
 
-    # static transform world -> robot_name/world
-    ld.add_action(
-        LBRDescriptionMixin.node_static_tf(
-            tf=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            parent="world",
-            child=PathJoinSubstitution([LaunchConfiguration("robot_name"), "world"]),
-        )
-    )
-
     # robot description
     robot_description = LBRDescriptionMixin.param_robot_description(mode="hardware")
 
@@ -46,12 +37,6 @@ def generate_launch_description() -> LaunchDescription:
     joint_trajectory_controller = LBRROS2ControlMixin.node_controller_spawner(
         controller="joint_trajectory_controller"
     )
-    lbr_state_broadcaster = LBRROS2ControlMixin.node_controller_spawner(
-        controller="lbr_state_broadcaster"
-    )
-    controller = LBRROS2ControlMixin.node_controller_spawner(
-        controller=LaunchConfiguration("ctrl")
-    )
 
     controller_event_handler = RegisterEventHandler(
         OnProcessStart(
@@ -59,8 +44,6 @@ def generate_launch_description() -> LaunchDescription:
             on_start=[
                 joint_state_broadcaster,
                 joint_trajectory_controller,
-                lbr_state_broadcaster,
-                controller,
             ],
         )
     )

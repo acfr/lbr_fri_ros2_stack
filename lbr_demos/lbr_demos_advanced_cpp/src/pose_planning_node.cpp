@@ -41,6 +41,8 @@ protected:
       phase_ = phase_ + 2 * M_PI * frequency_ * sampling_time_;
       cartesian_pose_command.position.z += amplitude_ * sin(phase_);
 
+      RCLCPP_INFO(rclcpp::get_logger("pose_planning"), "------------------ %f", cartesian_pose_command.position.z);
+
       pose_pub_->publish(cartesian_pose_command);
     }
   }
