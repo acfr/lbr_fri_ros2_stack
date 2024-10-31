@@ -3,6 +3,7 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <iostream>
 #include <geometry_msgs/msg/pose.hpp>
+#include "lbr_interfaces/srv/pose_service.hpp" 
 
 // Combined RobotMover class, which includes service and pose printing functionality
 class RobotMover : public rclcpp::Node {
@@ -26,6 +27,10 @@ public:
     timer_ = this->create_wall_timer(std::chrono::milliseconds(10),  // 100ms = 10 Hz
                                    std::bind(&RobotMover::publish_pose, this));
 
+    // Create the service that handles pose requests
+    pose_service_ = this->create_service<lbr_interfaces::srv::PoseService>(
+        "pose_service", std::bind(&RobotMover::pose_service_callback, this, std::placeholders::_1, std::placeholders::_2));
+    RCLCPP_INFO(this->get_logger(), "RobotMover ready to receive positions.");
 
     // Add the node to the executor and start the executor thread
     executor_->add_node(node_);
@@ -68,6 +73,71 @@ private:
     response->success = true;
   }
 
+  // Callback function to handle position data
+  void pose_service_callback(const std::shared_ptr<lbr_interfaces::srv::PoseService::Request> request,
+                             std::shared_ptr<lbr_interfaces::srv::PoseService::Response> response)
+  {
+    // Set a target Pose
+    auto const target_pose = [request]{
+      geometry_msgs::msg::Pose msg;
+      msg.orientation.w = request->target_pose.orientation.w;
+      msg.orientation.x = request->target_pose.orientation.x;
+      msg.orientation.y = request->target_pose.orientation.y;
+      msg.orientation.z = request->target_pose.orientation.z;
+      msg.position.x = request->target_pose.position.x;
+      msg.position.y = request->target_pose.position.y;
+      msg.position.z = request->target_pose.position.z;
+      return msg;
+    }();
+
+    std::vector<geometry_msgs::msg::Pose> waypoints;
+
+    waypoints.push_back(target_pose);
+    moveit_msgs::msg::RobotTrajectory trajectory;
+
+    double fraction = move_group_interface_.computeCartesianPath(waypoints, 0.005, 0.0, trajectory);
+
+    if (fraction > 0)
+    {        
+      move_group_interface_.execute(trajectory);
+      response->success = true;  // Set the response to true
+    }
+    else
+    {
+      RCLCPP_ERROR(this->get_logger(), "path planning failed!");
+      response->success = false;  // Set the response to false
+    }
+
+    // move_group_interface_.setPoseTarget(target_pose);
+    // // Set the target pose
+    // RCLCPP_INFO(this->get_logger(), "x: %f", target_pose.position.x);
+    // RCLCPP_INFO(this->get_logger(), "y: %f", target_pose.position.y);
+    // RCLCPP_INFO(this->get_logger(), "z %f", target_pose.position.z);
+    // RCLCPP_INFO(this->get_logger(), "x_theta: %f", target_pose.orientation.x);
+    // RCLCPP_INFO(this->get_logger(), "y_theta: %f", target_pose.orientation.y);
+    // RCLCPP_INFO(this->get_logger(), "z_theta: %f", target_pose.orientation.z);
+    // RCLCPP_INFO(this->get_logger(), "w: %f", target_pose.orientation.w);
+
+    // moveit::planning_interface::MoveGroupInterface::Plan plan;
+    // auto error_code = move_group_interface_.plan(plan);
+
+    // // RCLCPP_INFO(this->get_logger(), "Recieved a request %f", request->target_pose.pose.position.x);
+    // if (error_code == moveit::core::MoveItErrorCode::SUCCESS) {
+    //   // Execute the plan
+    //   auto execution_result = move_group_interface_.execute(plan);
+    //   if (execution_result == moveit::core::MoveItErrorCode::SUCCESS) {
+    //     RCLCPP_INFO(this->get_logger(), "Movement executed successfully!");
+    //     response->success = true;  // Set the response to true
+    //   } else {
+    //     RCLCPP_ERROR(this->get_logger(), "Failed to execute the movement.");
+    //     response->success = false;  // Set the response to false
+    //   }
+    // } else {
+    //   RCLCPP_ERROR(this->get_logger(), "Failed to plan to the requested pose.");
+    //   response->success = false;  // Set the response to false
+    // }
+  }
+
   // Member variables
   rclcpp::Node::SharedPtr node_; // Additional ROS node pointer
   moveit::planning_interface::MoveGroupInterface move_group_interface_;  // MoveIt interface for controlling the arm
@@ -75,8 +145,8 @@ private:
   std::shared_ptr<rclcpp::executors::SingleThreadedExecutor> executor_;  // Single-threaded executor
   std::thread executor_thread_;  // Thread to run the executor
   rclcpp::Publisher<geometry_msgs::msg::Pose>::SharedPtr pose_publisher_;
-    rclcpp::TimerBase::SharedPtr timer_;
-
+  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::Service<lbr_interfaces::srv::PoseService>::SharedPtr pose_service_;
 };
 
 // Main function - Entry point of the program
